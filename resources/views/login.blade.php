@@ -105,8 +105,15 @@
                 <input type="password" id="password" name="password" class="form-control" placeholder="Masukkan password" required>
             </div>
 
-            <button class="btn btn-primary w-100">Login</button>
+            <div class="d-grid gap-2 mt-3">
+            <button type="submit" class="btn btn-primary">Login</button>
+            
+            <a href="{{ route('home') }}" class="btn btn-outline-secondary">
+                ← Kembali ke Daftar Data
+            </a>
+        </div>
         </form>
+        
     </div>
 
     <div class="footer-text">

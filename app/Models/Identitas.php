@@ -17,4 +17,10 @@ class Identitas extends Model
         'alamat',
         'email',
     ];
+
+    public function user()
+    {
+        // Menghubungkan identitas ke user berdasarkan email
+        return $this->hasOne(User::class, 'email', 'email');
+    }
 }
