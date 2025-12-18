@@ -3,32 +3,38 @@
 namespace Database\Seeders;
 
 use App\Models\User;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
-    use WithoutModelEvents;
-
     /**
      * Seed the application's database.
      */
     public function run(): void
     {
-        // User::factory(10)->create();
+        // Gunakan updateOrCreate agar tidak terjadi error Duplicate Entry
+        
+        // Data Admin
+        User::updateOrCreate(
+            ['email' => 'admin@example.com'], // Cek apakah email ini sudah ada
+            [
+                'name' => 'Admin Diskominfotik',
+                'password' => Hash::make('admin123'), // Pastikan password terenkripsi
+                'role' => 'admin',
+                'email_verified_at' => now(),
+            ]
+        );
 
-        User::factory()->create([
-            'name' => 'Admin Diskominfotik',
-            'email' => 'admin@example.com',
-            'password' => bcrypt('admin123'),
-            'role' => 'admin',
-        ]);
-
-        User::factory()->create([
-            'name' => 'User Biasa',
-            'email' => 'user@example.com',
-            'password' => bcrypt('user123'),
-            'role' => 'user',
-        ]);
+        // Data User Biasa
+        User::updateOrCreate(
+            ['email' => 'user@example.com'], // Cek apakah email ini sudah ada
+            [
+                'name' => 'User Biasa',
+                'password' => Hash::make('user123'),
+                'role' => 'user',
+                'email_verified_at' => now(),
+            ]
+        );
     }
 }
